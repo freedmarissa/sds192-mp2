@@ -11,11 +11,18 @@ output: html_document
 This project is so interesting and relevant to my life!
 
 ```{r, include=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
 ```
-
-
-another test
+Viewing the data
+```{r}
+glimpse(house_elections)
+glimpse(candidates)
+glimpse(committees)
+glimpse(contributions)
+```

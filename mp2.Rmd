@@ -1,6 +1,6 @@
 ---
 title: "Mini-Project 2"
-author: "Marissa Freed & Natasha Rosenthal"
+author: "Marissa Freed, Natasha Rosenthal, & Margaret Welsh"
 date: "March 31, 2018"
 output: html_document
 ---

@@ -21,10 +21,10 @@ load("contributions.rda")
 ```
 Viewing the data
 ```{r}
-glimpse(house_elections)
-glimpse(candidates)
-glimpse(committees)
-glimpse(contributions)
+head(house_elections)
+head(candidates)
+head(committees)
+head(contributions)
 ```
 
 I'm making a change!

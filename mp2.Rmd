@@ -8,6 +8,7 @@ output:
 ---
 
 Question: How do democratic and republican candidates spend their money? Who spends more money? Whose money is spent more effectively? Do democrats or republicans have better financing strategies?
+Does incumbency affect spending in contested elections?
 
 ## Loading the data
 
@@ -29,7 +30,7 @@ head(candidates)
 head(committees)
 head(contributions)
 ```
-
+filtered contributions by pro and against 
 ```{r}
 contributions %>%
   group_by(transaction_type) %>%
@@ -39,4 +40,14 @@ pro_contributions <- contributions %>%
   filter(transaction_type != against_list)
 pro_contributions
 ```
-I'm making a change!
+
+filter out list of candidates to workable d/r
+```{r}
+house_demsreps <- house_elections %>%
+  filter(party == "R" | party == "D", general_votes != 0) %>%
+  mutate(st_dist = paste(state, district)) %>%
+  select(-state, -district, -primary_votes, -runoff_votes)
+glimpse(house_demsreps)
+```
+
+

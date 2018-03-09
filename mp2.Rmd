@@ -37,10 +37,12 @@ contributions %>%
   summarize(n_ish = n_distinct(transaction_type))
 against_list <- c("24A", "24N")
 pro_contributions <- contributions %>%
-  filter(transaction_type != against_list)
+  filter(transaction_type != against_list) %>%
+  select(-employer, -occupation, -sub_id)
 pro_contributions
 anti_contributions <- contributions %>%
-  filter(transaction_type == against_list)
+  filter(transaction_type == against_list)%>%
+  select(-employer, -occupation, -sub_id)
 anti_contributions
 ```
 

@@ -38,5 +38,8 @@ against_list <- c("24A", "24N")
 pro_contributions <- contributions %>%
   filter(transaction_type != against_list)
 pro_contributions
+anti_contributions <- contributions %>%
+  filter(transaction_type == against_list)
+anti_contributions
 ```
 I'm making a change!

@@ -30,4 +30,13 @@ head(committees)
 head(contributions)
 ```
 
+```{r}
+contributions %>%
+  group_by(transaction_type) %>%
+  summarize(n_ish = n_distinct(transaction_type))
+against_list <- c("24A", "24N")
+pro_contributions <- contributions %>%
+  filter(transaction_type != against_list)
+pro_contributions
+```
 I'm making a change!

@@ -51,8 +51,16 @@ filter out list of candidates to workable d/r
 house_demsreps <- house_elections %>%
   filter(party == "R" | party == "D", general_votes != 0) %>%
   mutate(st_dist = paste(state, district)) %>%
-  select(-state, -district, -primary_votes, -runoff_votes)
+  select(-state, -district, -primary_votes, -runoff_votes) 
 glimpse(house_demsreps)
 ```
 
-
+testing contribution totals?
+```{r}
+cand_conts <- contributions %>%
+  group_by(cmte_id, cand_id) %>%
+  rename(fec_id = cand_id) %>%
+  summarize(total_cont = sum(transaction_amt)) %>%
+  inner_join(house_demsreps)
+glimpse(cand_conts)
+```

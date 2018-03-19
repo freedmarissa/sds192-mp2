@@ -99,6 +99,16 @@ contested_contrib_dems <- contested_contributions %>%
   filter(party == "D")
 ```
 
+Find who spends more money total: democrats or republicans?
+
+```{r}
+dem_vs_repub <- contested_contributions %>%
+  ggplot(aes(x = party, y = totaldonations)) +
+  geom_col()
+dem_vs_repub
+```
+
+
 Making the data graphic
 
 ```{r}

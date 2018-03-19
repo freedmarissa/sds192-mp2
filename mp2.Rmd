@@ -55,7 +55,7 @@ house_demsreps <- house_elections %>%
 glimpse(house_demsreps)
 ```
 
-testing contribution totals?
+combined contributions and people data sets
 ```{r}
 cand_conts <- contributions %>%
   group_by(cmte_id, cand_id) %>%
@@ -63,4 +63,12 @@ cand_conts <- contributions %>%
   summarize(total_cont = sum(transaction_amt)) %>%
   inner_join(house_demsreps)
 glimpse(cand_conts)
+```
+
+total contributions for each candidate
+```{r}
+totcont_percandidate <- cand_conts%>%
+  group_by(fec_id, candidate_name, incumbent, party, general_votes, ge_winner, st_dist) %>%
+  summarize(totaldonations = sum(total_cont))
+glimpse(totcont_percandidate)
 ```

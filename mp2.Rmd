@@ -103,9 +103,10 @@ Find who spends more money total: democrats or republicans?
 
 ```{r}
 dem_vs_repub <- contested_contributions %>%
-  ggplot(aes(x = party, y = totaldonations, fill = party, show.legend = FALSE)) +
-  geom_col() +
-  scale_fill_manual(values = c("#34AAE0", "#E91D0E"))
+  ggplot(aes(x = party, y = totaldonations, fill = party)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_manual(values = c("#34AAE0", "#E91D0E")) +
+  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, 1e+08, 2e+08, 3e+08), labels = c("$0", "$100", "$200", "$300"))
 dem_vs_repub
 ```
 
@@ -120,7 +121,9 @@ incumbency
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
   geom_col(position = "dodge") +
-  scale_fill_manual(values = c("#34AAE0", "#E91D0E"))
+  scale_x_discrete(name = " ", labels = c("Not Incumbent", "Incumbent")) +
+  scale_y_continuous(name = "Total Donations", breaks = c(0e+00, 2e+06, 4e+06, 6e+06), labels = c("$0", "$2 Million", "$4 Million", "$6 Million")) +
+  scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))
 incumbency_party
 ```
 

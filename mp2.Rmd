@@ -86,17 +86,26 @@ contested_contributions %>%
   summarize(ndist = n_distinct(st_dist))
 ```
 
+make two separate data frames for democrats and republicans
+```{r}
+contested_contrib_reps <- contested_contributions %>%
+  filter(party == "R")
+
+contested_contrib_dems <- contested_contributions %>%
+  filter(party == "D")
+```
+
 Making the data graphic
 
 ```{r}
-contested_contributions %>%
-  ggplot(aes(x = candidate_name, y = totaldonations, col = incumbent)) +
+contested_contrib_dems %>%
+  ggplot(aes(x = st_dist, y = totaldonations, col = incumbent)) +
   facet_wrap(~ge_winner) +
   geom_col()
 
-contested_contributions %>%
-  ggplot(aes(x = candidate_name, y = totaldonations, col = incumbent)) +
-  facet_wrap(~party) +
+contested_contrib_reps %>%
+  ggplot(aes(x = st_dist, y = totaldonations, col = incumbent)) +
+  facet_wrap(~ge_winner) +
   geom_col()
 ```
 

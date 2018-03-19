@@ -9,6 +9,10 @@ output:
 
 Question: In contested House elections, looking at Democrats versus Republicans, who spends more money? Whose money is spent more effectively (which candidates win)? 
 Does incumbency affect spending in contested elections?
+To do: 
+> Find who spends more money total: democrats or republicans? **
+> Who wins more? Spends less doing so? (what percent of total spending for each race does the winner spend)
+> Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats? ***
 
 ## Loading the data
 This project is so interesting and relevant to my life!

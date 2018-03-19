@@ -7,7 +7,7 @@ output:
     code_folding: hide
 ---
 
-Question: Looking at Democrats versus Republicans, WWho spends more money? Whose money is spent more effectively (which candidates win)? 
+Question: In contested House elections, looking at Democrats versus Republicans, who spends more money? Whose money is spent more effectively (which candidates win)? 
 Does incumbency affect spending in contested elections?
 
 ## Loading the data

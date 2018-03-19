@@ -17,6 +17,7 @@ This project is so interesting and relevant to my life!
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(treemap)
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
@@ -97,6 +98,14 @@ contested_contributions %>%
   ggplot(aes(x = candidate_name, y = totaldonations, col = incumbent)) +
   facet_wrap(~party) +
   geom_col()
+```
+
+
+```{r}
+contested_contributions %>%
+  treemap(index=c("incumbent","party", "ge_winner"),  #A list of your categorical variables
+        vSize = "totaldonations",  #This is your quantitative variable
+        type="index")
 ```
 
 

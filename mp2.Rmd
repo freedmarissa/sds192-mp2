@@ -109,6 +109,21 @@ dem_vs_repub <- contested_contributions %>%
 dem_vs_repub
 ```
 
+Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats?
+
+```{r}
+incumbency <- contested_contributions %>%
+  ggplot(aes(x = incumbent, y = totaldonations)) +
+  geom_col()
+incumbency
+
+incumbency_party <- contested_contributions %>%
+  ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = c("#34AAE0", "#E91D0E"))
+incumbency_party
+```
+
 
 Making the data graphic
 

@@ -81,6 +81,8 @@ contested_districts <- totcont_percandidate %>%
 contested_contributions <- contested_districts %>%
   inner_join(totcont_percandidate, by = "st_dist")
 contested_contributions
+contested_contributions %>%
+  summarize(ndist = n_distinct(st_dist))
 ```
 
 

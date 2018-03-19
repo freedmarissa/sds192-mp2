@@ -103,8 +103,9 @@ Find who spends more money total: democrats or republicans?
 
 ```{r}
 dem_vs_repub <- contested_contributions %>%
-  ggplot(aes(x = party, y = totaldonations)) +
-  geom_col()
+  ggplot(aes(x = party, y = totaldonations, fill = party, show.legend = FALSE)) +
+  geom_col() +
+  scale_fill_manual(values = c("#34AAE0", "#E91D0E"))
 dem_vs_repub
 ```
 

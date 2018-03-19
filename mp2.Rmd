@@ -11,7 +11,6 @@ Question: In contested House elections, looking at Democrats versus Republicans,
 Does incumbency affect spending in contested elections?
 
 ## Loading the data
-
 This project is so interesting and relevant to my life!
 
 ```{r, include=FALSE}
@@ -73,7 +72,16 @@ totcont_percandidate <- cand_conts%>%
 glimpse(totcont_percandidate)
 ```
 
+```{r}
+contested_districts <- totcont_percandidate %>%
+  group_by(st_dist) %>%
+  summarize(cont = n_distinct(fec_id)) %>%
+  filter(cont != 1)
 
+contested_contributions <- contested_districts %>%
+  inner_join(totcont_percandidate, by = "st_dist")
+contested_contributions
+```
 
 
 

@@ -7,7 +7,7 @@ output:
     code_folding: hide
 ---
 
-Question: How do democratic and republican candidates spend their money? Who spends more money? Whose money is spent more effectively? Do democrats or republicans have better financing strategies?
+Question: Looking at Democrats versus Republicans, WWho spends more money? Whose money is spent more effectively (which candidates win)? 
 Does incumbency affect spending in contested elections?
 
 ## Loading the data
@@ -72,3 +72,14 @@ totcont_percandidate <- cand_conts%>%
   summarize(totaldonations = sum(total_cont))
 glimpse(totcont_percandidate)
 ```
+
+
+
+
+
+
+
+
+
+
+

@@ -103,7 +103,7 @@ contested_contributions %>%
 
 ```{r}
 contested_contributions %>%
-  treemap(index=c("incumbent","party", "ge_winner"),  #A list of your categorical variables
+  treemap(index=c("ge_winner", "party", "incumbent"),  #A list of your categorical variables
         vSize = "totaldonations",  #This is your quantitative variable
         type="index")
 ```

@@ -93,6 +93,10 @@ contested_contributions %>%
   facet_wrap(~ge_winner) +
   geom_col()
 
+contested_contributions %>%
+  ggplot(aes(x = candidate_name, y = totaldonations, col = incumbent)) +
+  facet_wrap(~party) +
+  geom_col()
 ```
 
 

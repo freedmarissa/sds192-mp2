@@ -129,27 +129,6 @@ incumbency_party
 ```
 
 
-Making the data graphic
-
-```{r}
-contested_contrib_dems %>%
-  ggplot(aes(x = st_dist, y = totaldonations, col = incumbent)) +
-  facet_wrap(~ge_winner) +
-  geom_col()
-
-contested_contrib_reps %>%
-  ggplot(aes(x = st_dist, y = totaldonations, col = incumbent)) +
-  facet_wrap(~ge_winner) +
-  geom_col()
-```
-
-
-```{r}
-contested_contributions %>%
-  treemap(index=c("ge_winner", "party", "incumbent"),
-        vSize = "totaldonations", 
-        type="index")
-```
 
 
 

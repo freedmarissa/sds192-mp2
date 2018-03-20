@@ -106,6 +106,7 @@ dem_vs_repub <- contested_contributions %>%
   ggplot(aes(x = party, y = totaldonations, fill = party)) +
   geom_col(show.legend = FALSE) +
   scale_fill_manual(values = c("#34AAE0", "#E91D0E")) +
+  labs(title = "Total Donations Broken Down by Party") +
   scale_x_discrete(name = " ", labels = c("Democrat", "Republican")) +
   scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, 1e+08, 2e+08, 3e+08), labels = c("$0", "$100", "$200", "$300"))
 dem_vs_repub
@@ -116,13 +117,17 @@ Do incumbents spend more or less than their opposition? Does it differ for repub
 ```{r}
 incumbency <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations)) +
-  geom_col()
+  geom_col() +
+  labs(title = "Donations For Non-Incumbents vs. Incumbents") +
+  scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
+  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .5e+08, 1e+08, 1.5e+08, 2e+08, 2.5e+08, 3e+08, 3.5e+08), labels = c("$0", "$50", "$100", "$150", "$200", "$250", "$300", "$350"))
 incumbency
 
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
   geom_col(position = "dodge") +
-  scale_x_discrete(name = " ", labels = c("Not Incumbent", "Incumbent")) +
+  labs(title = "Donations For Non-Incumbents vs. Incumbents in Each Party") +
+  scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
   scale_y_continuous(name = "Total Donations", breaks = c(0e+00, 1e+06, 2e+06, 3e+06, 4e+06, 5e+06, 6e+06, 7e+06), labels = c("$0", "$1 Million", "$2 Million", "$3 Million", "$4 Million", "$5 Million", "$6 Million", "$7 Million")) +
   scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))
 incumbency_party

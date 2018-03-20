@@ -104,7 +104,7 @@ dem_vs_repub <- contested_contributions %>%
   scale_fill_manual(values = c("#34AAE0", "#E91D0E")) +
   labs(title = "Total Donations Broken Down by Party") +
   scale_x_discrete(name = " ", labels = c("Democrat", "Republican")) +
-  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, 1e+08, 2e+08, 3e+08), labels = c("$0", "$100", "$200", "$300"))
+  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .5e+08, 1e+08, 1.5e+08, 2e+08, 2.5e+08), labels = c("$0", "$50", "$100", "$150", "$200", "$250"))
 dem_vs_repub
 ```
 

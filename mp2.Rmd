@@ -65,11 +65,12 @@ glimpse(house_demsreps)
 
 combined contributions and people data sets
 ```{r}
-cand_conts <- contributions %>%
+cand_conts <- pro_contributions %>%
   group_by(cmte_id, cand_id) %>%
   rename(fec_id = cand_id) %>%
   summarize(total_cont = sum(transaction_amt)) %>%
-  inner_join(house_demsreps)
+  inner_join(house_demsreps, by = "fec_id")
+#joined our data frame that only includes donations in favor of the candidate with our data frame that only includes Republican & Democratic candidates
 glimpse(cand_conts)
 ```
 

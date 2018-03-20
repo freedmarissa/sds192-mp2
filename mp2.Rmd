@@ -95,15 +95,6 @@ contested_contributions %>%
   summarize(ndist = n_distinct(st_dist))
 ```
 
-make two separate data frames for democrats and republicans
-```{r}
-contested_contrib_reps <- contested_contributions %>%
-  filter(party == "R")
-
-contested_contrib_dems <- contested_contributions %>%
-  filter(party == "D")
-```
-
 Find who spends more money total: democrats or republicans?
 
 ```{r}

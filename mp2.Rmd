@@ -34,19 +34,23 @@ head(candidates)
 head(committees)
 head(contributions)
 ```
-filtered contributions by pro and against 
+
 ```{r}
 contributions %>%
   group_by(transaction_type) %>%
   summarize(n_ish = n_distinct(transaction_type))
+#summarizing the contributions data frame after grouping by transaction_type so that we could see which types were included in the data
 against_list <- c("24A", "24N")
+#we found that codes 24A and 24N were donations made against a candidate
 pro_contributions <- contributions %>%
   filter(transaction_type != against_list) %>%
   select(-employer, -occupation, -sub_id)
+#this data frame includes all transaction codes except 24A and 24N--the "against_list".
 pro_contributions
 anti_contributions <- contributions %>%
   filter(transaction_type == against_list)%>%
   select(-employer, -occupation, -sub_id)
+#this data fram includes only the codes 24A and 24N
 anti_contributions
 ```
 

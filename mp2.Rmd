@@ -97,7 +97,7 @@ contested_contributions %>%
 
 Find who spends more money total: democrats or republicans?
 
-```{r}
+```{r, warning=FALSE}
 dem_vs_repub <- contested_contributions %>%
   ggplot(aes(x = party, y = totaldonations, fill = party)) +
   geom_col(show.legend = FALSE) +
@@ -110,7 +110,7 @@ dem_vs_repub
 
 Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats?
 
-```{r}
+```{r, warning=FALSE}
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
   geom_col() +

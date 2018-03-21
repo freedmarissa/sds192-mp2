@@ -46,12 +46,10 @@ pro_contributions <- contributions %>%
   filter(transaction_type != against_list) %>%
   select(-employer, -occupation, -sub_id)
 #this data frame includes all transaction codes except 24A and 24N--the "against_list".
-pro_contributions
 anti_contributions <- contributions %>%
   filter(transaction_type == against_list)%>%
   select(-employer, -occupation, -sub_id)
 #this data fram includes only the codes 24A and 24N
-anti_contributions
 ```
 
 ```{r}
@@ -60,7 +58,6 @@ house_demsreps <- house_elections %>%
   mutate(st_dist = paste(state, district)) %>%
   select(-state, -district, -primary_votes, -runoff_votes) 
 #filtered the candidates in the house_elections data frame to only include Republican and Democrat candidates, and those did not have 0 votes in the general election
-glimpse(house_demsreps)
 ```
 
 combined contributions and people data sets
@@ -71,7 +68,6 @@ cand_conts <- pro_contributions %>%
   summarize(total_cont = sum(transaction_amt)) %>%
   inner_join(house_demsreps, by = "fec_id")
 #joined our data frame that only includes donations in favor of the candidate with our data frame that only includes Republican & Democratic candidates
-glimpse(cand_conts)
 ```
 
 total contributions for each candidate
@@ -79,7 +75,6 @@ total contributions for each candidate
 totcont_percandidate <- cand_conts%>%
   group_by(fec_id, candidate_name, incumbent, party, general_votes, ge_winner, st_dist) %>%
   summarize(totaldonations = sum(total_cont))
-glimpse(totcont_percandidate)
 ```
 
 ```{r}

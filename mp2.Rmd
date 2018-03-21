@@ -28,14 +28,14 @@ load("committees.rda")
 load("contributions.rda")
 ```
 Viewing the data
-```{r}
+```{r, warning=FALSE}
 head(house_elections)
 head(candidates)
 head(committees)
 head(contributions)
 ```
 
-```{r}
+```{r, warning=FALSE}
 contributions %>%
   group_by(transaction_type) %>%
   summarize(n_ish = n_distinct(transaction_type))
@@ -52,7 +52,7 @@ anti_contributions <- contributions %>%
 #this data fram includes only the codes 24A and 24N
 ```
 
-```{r}
+```{r, warning=FALSE}
 house_demsreps <- house_elections %>%
   filter(party == "R" | party == "D", general_votes != 0) %>%
   mutate(st_dist = paste(state, district)) %>%
@@ -61,7 +61,7 @@ house_demsreps <- house_elections %>%
 ```
 
 combined contributions and people data sets
-```{r}
+```{r, warning=FALSE}
 cand_conts <- pro_contributions %>%
   group_by(cmte_id, cand_id) %>%
   rename(fec_id = cand_id) %>%
@@ -71,13 +71,13 @@ cand_conts <- pro_contributions %>%
 ```
 
 total contributions for each candidate
-```{r}
+```{r, warning=FALSE}
 totcont_percandidate <- cand_conts%>%
   group_by(fec_id, candidate_name, incumbent, party, general_votes, ge_winner, st_dist) %>%
   summarize(totaldonations = sum(total_cont))
 ```
 
-```{r}
+```{r, warning=FALSE}
 contested_districts <- totcont_percandidate %>%
   group_by(st_dist) %>%
   summarize(cont = n_distinct(fec_id)) %>%

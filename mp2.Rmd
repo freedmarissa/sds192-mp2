@@ -123,8 +123,6 @@ incumbency_party
 
 
 
-, breaks = c(0e+00, 1e+06, 2e+06, 3e+06, 4e+06, 5e+06, 6e+06, 7e+06), labels = c("$0", "$1 Million", "$2 Million", "$3 Million", "$4 Million", "$5 Million", "$6 Million", "$7 Million")
-
 
 Link to GitHub repository:
 https://github.com/freedmarissa/sds192-mp2

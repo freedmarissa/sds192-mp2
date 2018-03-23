@@ -54,7 +54,7 @@ anti_contributions <- contributions %>%
 
 ```{r, warning=FALSE}
 house_demsreps <- house_elections %>%
-  filter(party == "R" | party == "D", general_votes != 0, primary_votes != 0) %>%
+  filter(party == "R" | party == "D", general_votes != 0) %>%
   mutate(st_dist = paste(state, district)) %>%
   select(-state, -district, -primary_votes, -runoff_votes) 
 #filtered the candidates in the house_elections data frame to only include Republican and Democrat candidates, those did not have 0 votes in the general election (remove candidates that lost their primary), and those that did not have 0 votes in the primary (remove candidates running uncontested)

@@ -57,7 +57,7 @@ house_demsreps <- house_elections %>%
   filter(party == "R" | party == "D", general_votes != 0) %>%
   mutate(st_dist = paste(state, district)) %>%
   select(-state, -district, -primary_votes, -runoff_votes) 
-#filtered the candidates in the house_elections data frame to only include Republican and Democrat candidates, those did not have 0 votes in the general election (remove candidates that lost their primary), and those that did not have 0 votes in the primary (remove candidates running uncontested)
+#filtered the candidates in the house_elections data frame to only include Republican and Democrat candidates, those did not have 0 votes in the general election 
 ```
 
 combined contributions and people data sets
@@ -99,7 +99,7 @@ dem_vs_repub <- contested_contributions %>%
   scale_fill_manual(values = c("#34AAE0", "#E91D0E")) +
   labs(title = "Total Donations Broken Down by Party") +
   scale_x_discrete(name = " ", labels = c("Democrat", "Republican")) +
-  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .5e+08, 1e+08, 1.5e+08, 2e+08), labels = c("$0", "$50", "$100", "$150", "$200"))
+  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .5e+08, 1e+08, 1.5e+08, 2e+08, 2.5e+08), labels = c("$0", "$50", "$100", "$150", "$200", "$250"))
 dem_vs_repub
 ```
 
@@ -111,7 +111,7 @@ incumbency_party <- contested_contributions %>%
   geom_col() +
   labs(title = "Donations For Non-Incumbents vs. Incumbents in Each Party") +
   scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
-  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08), labels = c("$0", "$75", "$150", "$225")) +
+  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08, 3e+08), labels = c("$0", "$75", "$150", "$225", "$300")) +
   scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))
 incumbency_party
 ```

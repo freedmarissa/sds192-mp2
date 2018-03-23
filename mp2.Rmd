@@ -119,6 +119,8 @@ cc_nums %>%
 ```
 
 ### Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats?
+In the below graph, we answer the questions of whether incumbent or non-incumbents candidates raised more money, and how this differs across party lines. Across the board, incumbent candidates received more in donations than non-incumbents, collecting almost double the amount of money that non-incumbents did. However, the data show that while Democratic incumbents and non-incumbents received near the same amount in donations (with incumbents receiving slightly more than non-incumbents), Republican incumbents and non-incumbents received starkly different amounts. The data show that Republican incumbents received much more than non-incumbents. 
+
 ```{r, warning = FALSE}
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
@@ -130,6 +132,7 @@ incumbency_party <- contested_contributions %>%
 incumbency_party + 
   theme_fivethirtyeight()
 ```
+It seems that Republicans employ a strategy of focusing their fundraising efforts on ensuring incumbent wins rather than trying to establish new faces by pouring resources into non-incumbent candidates. Democrats, by comparison, seem to focus equally on incumbent and non-incumbent candidates as evidenced by their near-equal donations for both candidate types. This may be due to the tendency of Republicans to honor old, well-established traditions, both socially and economically, as well as the Democratic inclination toward youth and new ideas. We visualize this data using a stacked bar graph, allowing the viewer a clear look at the variance between the parties as well as the difference in donations for incumbent and non-incumbent candidates. Again, we continue the color mapping theme from the first graphic for clarity.
 
 In short, these data, visualized by our two graphics, show the viewer which major party, between Democrats and Republicans, raised more funds, and how much fundraising focus both parties put on their incumbent candidates compared to non-incumbent candidates.
 

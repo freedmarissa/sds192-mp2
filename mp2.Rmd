@@ -81,6 +81,7 @@ total contributions for each candidate
 totcont_percandidate <- cand_conts%>%
   group_by(fec_id, candidate_name, incumbent, party, general_votes, ge_winner, st_dist) %>%
   summarize(totaldonations = sum(total_cont))
+#summarize to find the total donations for each candidate
 ```
 
 ```{r, warning=FALSE}
@@ -88,12 +89,10 @@ contested_districts <- totcont_percandidate %>%
   group_by(st_dist) %>%
   summarize(cont = n_distinct(fec_id)) %>%
   filter(cont != 1)
-
+#Filtered to find the districts that were contested in the contributions data set 
 contested_contributions <- contested_districts %>%
   inner_join(totcont_percandidate, by = "st_dist")
-contested_contributions
-contested_contributions %>%
-  summarize(ndist = n_distinct(st_dist))
+#join our filtered contributions data set with the filtered districts data set
 ```
 
 ### Who spends more money total: Democrats or Republicans?

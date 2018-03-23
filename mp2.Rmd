@@ -111,7 +111,7 @@ dem_vs_repub
 ```
 
 
-### How many incumbents/challengers were democrats and republicans?
+### Looking at average spending per candidate based on party, incumbency, and success:
 ```{r, warning=FALSE}
 cc_sums <- contested_contributions %>%
   group_by(party, incumbent, ge_winner) %>%

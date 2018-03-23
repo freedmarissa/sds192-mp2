@@ -116,7 +116,15 @@ incumbency_party <- contested_contributions %>%
 incumbency_party
 ```
 
-
+how many incumbents/challengers were democrats and republicans?
+```{r}
+contested_contributions %>%
+  group_by(party) %>%
+  summarize(n_candidates = n_distinct(candidate_name))
+contested_contributions %>%
+  group_by(party, incumbent) %>%
+  summarize(n_incumbent = n_distinct(fec_id))
+```
 
 
 Link to GitHub repository:

@@ -145,7 +145,8 @@ incumbency_party <- contested_contributions %>%
   theme_tufte()
 incumbency_party
 ```
- In viewing the graph, it must also be taken into account that Republicans had more incumbent candidates, and Democrats had more challengers. We visualize the contributions data using a stacked bar graph, allowing the viewer a clear look at the difference between the parties as well as the difference in donations for incumbent and non-incumbent candidates. Again, we continue the color mapping theme from the first graphic for clarity.
+
+In viewing the graph, it must also be taken into account that Republicans had more incumbent candidates, and Democrats had more challengers. We visualize the contributions data using a stacked bar graph, allowing the viewer a clear look at the difference between the parties as well as the difference in donations for incumbent and non-incumbent candidates. Again, we continue the color mapping theme from the first graphic for clarity.
 
 In conclusion, our main takeaway from this data is that Republicans utilize a strategy of focusing their fundraising efforts more strongly on highly contested incumbent elections rather than trying to flip more Democratic seats. Democrats, by comparison, seem to focus equally on incumbent and non-incumbent candidates, however, also spending more money on the closer elections as evidenced by the smaller difference between total funding for each.
 

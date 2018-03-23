@@ -16,9 +16,6 @@ To do:
 > Who wins more? Spends less doing so? (what percent of total spending for each race does the winner spend)
 > Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats? ***
 
-## Loading the data
-This project is so interesting and relevant to my life!
-
 ```{r, include=FALSE}
 library(tidyverse)
 library(dplyr)
@@ -29,13 +26,8 @@ load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
 ```
-Viewing the data
-```{r, warning=FALSE}
-head(house_elections)
-head(candidates)
-head(committees)
-head(contributions)
-```
+
+Before the 2012 elections, there were 193 Democrats and 242 Republicans in the House of Representatives, all of whom were up for reelection. Of the 432 House members, 42 did not run for reelection in 2012, and another 13 were defeated in their primary elections. For our analysis, we looked only at the elections in which two candidates of different parties ran against each other (so no non-contested elections). As we were looking at Democratic versus Republican spending, we also filtered out districts in which an incumbent beat a third-party candidate. 
 
 ```{r, warning=FALSE}
 contributions %>%
@@ -53,7 +45,6 @@ anti_contributions <- contributions %>%
   select(-employer, -occupation, -sub_id)
 #this data fram includes only the codes 24A and 24N
 ```
-Before the 2012 elections, there were 193 Democrats and 242 Republicans in the House of Representatives, all of whom were up for reelection. Of the 432 House members, 42 did not run for reelection in 2012, and another 13 were defeated in their primary elections. For our analysis, we looked only at the elections in which two candidates of different parties ran against each other (so no non-contested elections). As we were looking at Democratic versus Republican spending, we also filtered out districts in which an incumbent beat a third-party candidate. 
 
 ```{r, warning=FALSE}
 house_demsreps <- house_elections %>%
@@ -66,7 +57,6 @@ house_demsreps <- house_elections %>%
 glimpse(house_demsreps)
 ```
 
-combined contributions and people data sets
 ```{r, warning=FALSE}
 cand_conts <- pro_contributions %>%
   group_by(cmte_id, cand_id) %>%
@@ -76,7 +66,6 @@ cand_conts <- pro_contributions %>%
 #joined our data frame that only includes donations in favor of the candidate with our data frame that only includes Republican & Democratic candidates
 ```
 
-total contributions for each candidate
 ```{r, warning=FALSE}
 totcont_percandidate <- cand_conts%>%
   group_by(fec_id, candidate_name, incumbent, party, general_votes, ge_winner, st_dist) %>%
@@ -117,15 +106,12 @@ dem_vs_repub
 cc_sums <- contested_contributions %>%
   group_by(party, incumbent, ge_winner) %>%
   summarize(sumtotal = sum(totaldonations))
-cc_sums
 
-contested_contributions %>%
-  group_by(party) %>%
-  summarize(n_candidates = n_distinct(candidate_name))
+
 cc_nums <- contested_contributions %>%
   group_by(party, incumbent, ge_winner) %>%
   summarize(n_candidates = n_distinct(fec_id))
-cc_nums
+
 
 cc_nums %>%
   inner_join(cc_sums, by = c("party", "incumbent", "ge_winner")) %>%
@@ -137,7 +123,7 @@ cc_nums %>%
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
   geom_col() +
-  labs(title = "Donations For Non-Incumbents vs. Incumbents in Each Party") +
+  labs(title = "Donations For Non-Incumbents vs. Incumbents", size = 12) +
   scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
   scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08, 3e+08), labels = c("$0", "$75", "$150", "$225", "$300")) +
   scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))

@@ -7,6 +7,8 @@ output:
     code_folding: hide
 ---
 
+Utilizing data from the Federal Election Commission based on the 2011–2012 federal election cycle, our group set out to answer a few key questions about parties and incumbency, looking at contested House of Representative elections across the nation.
+
 Question: In contested House elections, looking at Democrats versus Republicans, who spends more money? Whose money is spent more effectively (which candidates win)? 
 Does incumbency affect spending in contested elections?
 To do: 
@@ -51,6 +53,7 @@ anti_contributions <- contributions %>%
   select(-employer, -occupation, -sub_id)
 #this data fram includes only the codes 24A and 24N
 ```
+Before the 2012 elections, there were 193 Democrats and 242 Republicans in the House of Representatives, all of whom were up for reelection. Of the 432 House members, 42 did not run for reelection in 2012, and another 13 were defeated in their primary elections. For our analysis, we looked only at the elections in which two candidates of different parties ran against each other (so no non-contested elections). As we were looking at Democratic versus Republican spending, we also filtered out districts in which an incumbent beat a third-party candidate. 
 
 ```{r, warning=FALSE}
 house_demsreps <- house_elections %>%
@@ -60,8 +63,7 @@ house_demsreps <- house_elections %>%
   select(-state, -district, -primary_votes, -runoff_votes) %>%
   arrange(st_dist)
 #filtered the candidates in the house_elections data frame to only include Republican and Democrat candidates, those did not have 0 votes in the general election 
-house_demsreps
-
+glimpse(house_demsreps)
 ```
 
 combined contributions and people data sets
@@ -94,7 +96,9 @@ contested_contributions %>%
   summarize(ndist = n_distinct(st_dist))
 ```
 
-Find who spends more money total: democrats or republicans?
+### Who spends more money total: Democrats or Republicans?
+
+This graph addresses the question of which major party raised more donations overall for their House candidates in the 2011-2012 federal election cycle, both incumbent and non-incumbent. It is clear that while the parties are nearly equal in donations, Republican candidates received slightly more than their democratic counterparts. A bar graph allows this data to be read clearly, and by mapping color to party, with blue representing Democrats and red representing Republicans, we allow the viewer to clearly comprehend the data based on their prior associations between these parties and their characteristic colors.
 
 ```{r, warning=FALSE}
 dem_vs_repub <- contested_contributions %>%
@@ -107,26 +111,14 @@ dem_vs_repub <- contested_contributions %>%
 dem_vs_repub
 ```
 
-Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats?
 
+### How many incumbents/challengers were democrats and republicans?
 ```{r, warning=FALSE}
 cc_sums <- contested_contributions %>%
   group_by(party, incumbent) %>%
   summarize(sumtotal = sum(totaldonations))
 cc_sums
-incumbency_party <- contested_contributions %>%
-  ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
-  geom_col() +
-  labs(title = "Donations For Non-Incumbents vs. Incumbents in Each Party") +
-  scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
-  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08, 3e+08), labels = c("$0", "$75", "$150", "$225", "$300")) +
-  scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))
-incumbency_party
 
-```
-
-how many incumbents/challengers were democrats and republicans?
-```{r}
 contested_contributions %>%
   group_by(party) %>%
   summarize(n_candidates = n_distinct(candidate_name))
@@ -138,8 +130,24 @@ cc_nums
 cc_nums %>%
   inner_join(cc_sums, by = c("party", "incumbent")) %>%
   mutate(avg_amt_candidate = sumtotal/n_candidates)
-  
 ```
+
+### Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats?
+```{r, warning = FALSE}
+incumbency_party <- contested_contributions %>%
+  ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
+  geom_col() +
+  labs(title = "Donations For Non-Incumbents vs. Incumbents in Each Party") +
+  scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
+  scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08, 3e+08), labels = c("$0", "$75", "$150", "$225", "$300")) +
+  scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))
+incumbency_party
+
+```
+
+In short, these data, visualized by our two graphics, show the viewer which major party, between Democrats and Republicans, raised more funds, and how much fundraising focus both parties put on their incumbent candidates compared to non-incumbent candidates.
+
+
 
 
 Link to GitHub repository:

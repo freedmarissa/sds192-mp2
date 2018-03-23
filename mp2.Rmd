@@ -115,7 +115,7 @@ dem_vs_repub
 ### How many incumbents/challengers were democrats and republicans?
 ```{r, warning=FALSE}
 cc_sums <- contested_contributions %>%
-  group_by(party, incumbent) %>%
+  group_by(party, incumbent, ge_winner) %>%
   summarize(sumtotal = sum(totaldonations))
 cc_sums
 
@@ -123,12 +123,12 @@ contested_contributions %>%
   group_by(party) %>%
   summarize(n_candidates = n_distinct(candidate_name))
 cc_nums <- contested_contributions %>%
-  group_by(party, incumbent) %>%
+  group_by(party, incumbent, ge_winner) %>%
   summarize(n_candidates = n_distinct(fec_id))
 cc_nums
 
 cc_nums %>%
-  inner_join(cc_sums, by = c("party", "incumbent")) %>%
+  inner_join(cc_sums, by = c("party", "incumbent", "ge_winner")) %>%
   mutate(avg_amt_candidate = sumtotal/n_candidates)
 ```
 

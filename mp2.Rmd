@@ -26,11 +26,8 @@ load("contributions.rda")
 ### Background
 Before the 2012 elections, there were 193 Democrats and 242 Republicans in the House of Representatives ([source](http://history.house.gov/Congressional-Overview/Profiles/112th/)), all of whom were up for reelection. Of the 432 House members, 42 did not run for reelection in 2012, and another 13 were defeated in their primary elections. For our analysis, we looked only at the elections in which two candidates of different parties ran against each other (so only contested elections). As our goal was solely comparing Democratic versus Republican spending, we also filtered out districts that did not fit this criteria, and all third-party candidates. 
 
-```{r filtering contributions, warning=FALSE}
-contributions %>%
-  group_by(transaction_type) %>%
-  summarize(n_ish = n_distinct(transaction_type))
-#summarizing the contributions data frame after grouping by transaction_type so that we could see which types were included in the data
+```{r filtering contributions,  warning=FALSE}
+
 against_list <- c("24A", "24N")
 #we found that codes 24A and 24N were donations made against a candidate
 pro_contributions <- contributions %>%
@@ -137,6 +134,10 @@ For both the Democrats and Republicans, the candidates who recieved the most wer
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
   geom_col() +
+  annotate("text", x = 1, y = 100000000, label = "$100,547,605") +
+  annotate("text", x = 1, y = 30000000, label = "$56,124,275" ) + 
+  annotate("text", x = 2, y = 90000000, label = "$182,980,686") +
+  annotate("text", x = 2, y = 240000000, label = "$111,883,589" ) +
   labs(title = "Total Contributions by Incumbency and Party") +
   scale_x_discrete(name = " ", labels = c("Non-Incumbent", "Incumbent")) +
   scale_y_continuous(name = "Total Contributions (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08, 3e+08), labels = c("$0", "$75", "$150", "$225", "$300")) +

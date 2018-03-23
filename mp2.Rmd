@@ -7,10 +7,9 @@ output:
     code_folding: hide
 ---
 
-##Utilizing data from the Federal Election Commission based on the 2011–2012 federal election cycle, our group set out to answer a few key questions about contested House of Representative elections.
-
-##In contested House elections, looking at Democrats versus Republicans, who spends more money? 
-##Does incumbency affect spending in contested elections?
+###Utilizing data from the Federal Election Commission based on the 2011–2012 federal election cycle, our group set out to answer a few key questions about contested House of Representative elections.
+In contested House elections, looking at Democrats versus Republicans, who spends more money? 
+Does incumbency affect spending in contested elections?
 
 
 ```{r libraries, include=FALSE}

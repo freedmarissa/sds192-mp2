@@ -54,10 +54,14 @@ anti_contributions <- contributions %>%
 
 ```{r, warning=FALSE}
 house_demsreps <- house_elections %>%
-  filter(party == "R" | party == "D", general_votes != 0) %>%
+  filter(general_votes !=0) %>%
+  filter(party == "R" | party == "D") %>%
   mutate(st_dist = paste(state, district)) %>%
-  select(-state, -district, -primary_votes, -runoff_votes) 
+  select(-state, -district, -primary_votes, -runoff_votes) %>%
+  arrange(st_dist)
 #filtered the candidates in the house_elections data frame to only include Republican and Democrat candidates, those did not have 0 votes in the general election 
+house_demsreps
+
 ```
 
 combined contributions and people data sets
@@ -106,6 +110,10 @@ dem_vs_repub
 Do incumbents spend more or less than their opposition? Does it differ for republicans and democrats?
 
 ```{r, warning=FALSE}
+cc_sums <- contested_contributions %>%
+  group_by(party, incumbent) %>%
+  summarize(sumtotal = sum(totaldonations))
+cc_sums
 incumbency_party <- contested_contributions %>%
   ggplot(aes(x = incumbent, y = totaldonations, fill = party)) +
   geom_col() +
@@ -114,6 +122,7 @@ incumbency_party <- contested_contributions %>%
   scale_y_continuous(name = "Total Donations (In Millions)", breaks = c(0e+00, .75e+08, 1.5e+08, 2.25e+08, 3e+08), labels = c("$0", "$75", "$150", "$225", "$300")) +
   scale_fill_manual(values = c("#34AAE0", "#E91D0E"), name = "Party", labels = c("Democrat", "Republican"))
 incumbency_party
+
 ```
 
 how many incumbents/challengers were democrats and republicans?
@@ -121,9 +130,15 @@ how many incumbents/challengers were democrats and republicans?
 contested_contributions %>%
   group_by(party) %>%
   summarize(n_candidates = n_distinct(candidate_name))
-contested_contributions %>%
+cc_nums <- contested_contributions %>%
   group_by(party, incumbent) %>%
-  summarize(n_incumbent = n_distinct(fec_id))
+  summarize(n_candidates = n_distinct(fec_id))
+cc_nums
+
+cc_nums %>%
+  inner_join(cc_sums, by = c("party", "incumbent")) %>%
+  mutate(avg_amt_candidate = sumtotal/n_candidates)
+  
 ```
 
 
